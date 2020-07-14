@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <form [formGroup]="recipeForm">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button 
+                        [disabled]="!recipeForm.valid"
+                        type="submit" 
+                        class="btn btn-success"
+                        routerLink=".."
+                        (click)="onSubmit()">Save</button>
+                        <button 
+                        type="button" 
+                        class="btn btn-danger"
+                        routerLink="..">Cancel</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="name">Name</label>
+                                <input 
+                                type="text" 
+                                name="name" 
+                                id="name" 
+                                class="form-control"
+                                formControlName="recipeName">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="url">Image URL</label>
+                            <input 
+                            type="text" 
+                            name="url" 
+                            id="url" 
+                            class="form-control"
+                            formControlName="url">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img [src]="recipeForm.value['url']" alt="img" class="img-fluid">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea 
+                            type="text" 
+                            name="description" 
+                            id="description" 
+                            class="form-control" 
+                            rows="6"
+                            formControlName="description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" formArrayName="ingredients">
+                        <div class="form-group">
+                            <div class="row"
+                            *ngFor="let ingredientControl of selectedRecipeIngredients.controls;index as i" 
+                            [formGroupName]="i">
+                                <div class="col-sm-8">
+                                    <input 
+                                    type="text" 
+                                    name="name" 
+                                    id="name" 
+                                    class="form-control"
+                                    formControlName="name">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input 
+                                    type="number" 
+                                    class="form-control"
+                                    name="amount"
+                                    id="amount"
+                                    formControlName="amount">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" class="btn btn-success" (click)="onAddIngredient()">Add Ingredient</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
